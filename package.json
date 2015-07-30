@@ -24,6 +24,9 @@
   "jspm": {
     "directories": {},
     "configFile": "jspm.config.js",
+    "dependencies": {
+      "bootstrap": "github:twbs/bootstrap@^3.3.5"
+    },
     "devDependencies": {
       "babel": "npm:babel-core@^5.1.13",
       "babel-runtime": "npm:babel-runtime@^5.1.13",
