@@ -20,5 +20,14 @@
   "bugs": {
     "url": "https://github.com/Pencroff/presentations/issues"
   },
-  "homepage": "https://github.com/Pencroff/presentations#readme"
+  "homepage": "https://github.com/Pencroff/presentations#readme",
+  "jspm": {
+    "directories": {},
+    "configFile": "jspm.config.js",
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.1.13",
+      "babel-runtime": "npm:babel-runtime@^5.1.13",
+      "core-js": "npm:core-js@^0.9.4"
+    }
+  }
 }
