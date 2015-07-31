@@ -25,5 +25,4 @@ nbproject
 .idea/
 coverage/
 benchmark/
-public/
 jspm_packages/

@@ -1,0 +1,36 @@
+{
+  "name": "presentations",
+  "version": "1.0.0",
+  "description": "My presentations about intresting things",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pencroff/presentations.git"
+  },
+  "keywords": [
+    "presentations",
+    "talks",
+    "information"
+  ],
+  "author": "Pencroff",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pencroff/presentations/issues"
+  },
+  "homepage": "https://github.com/Pencroff/presentations#readme",
+  "jspm": {
+    "directories": {},
+    "configFile": "jspm.config.js",
+    "dependencies": {
+      "bootstrap": "github:twbs/bootstrap@^3.3.5"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.1.13",
+      "babel-runtime": "npm:babel-runtime@^5.1.13",
+      "core-js": "npm:core-js@^0.9.4"
+    }
+  }
+}
