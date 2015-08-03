@@ -1,0 +1,18 @@
+<li [class.completed]="item.completed" *ng-if="!item.hidden">
+    <div class="view"
+         [class.hidden]="item.isEditing">
+        <input class="toggle" type="checkbox"
+               (click)="onComplete($event)"
+               [checked]="item.completed">
+        <label (dblclick)="editItem($event)">{{item.title}}</label>
+        <button class="destroy" (click)="onDestroy($event)"></button>
+    </div>
+
+    <div>
+        <input class="edit"
+               [class.visible]="item.isEditing"
+               [value]="item.title"
+               (keyup)="finishEditItem($event)">
+    </div>
+
+</li>
