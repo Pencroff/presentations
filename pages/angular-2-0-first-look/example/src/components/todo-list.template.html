@@ -1,0 +1,46 @@
+    <header id="header">
+        <input
+                id="new-todo"
+                placeholder="What needs to be done?"
+                autofocus
+                (keyup)="addNewItem($event)">
+    </header>
+
+    <section id="main">
+        <input id="toggle-all"
+               type="checkbox"
+               *ng-if="list.length"
+               [checked]="isAllCompleted()"
+               (click)="toggleAllItems($event)">
+        <label for="toggle-all">Mark all as complete</label>
+
+        <ul id="todo-list">
+            <todo-item *ng-for="#todoItem of list"
+                       [item] = todoItem
+                       (complete)="onCompleteItem($event)"
+                       (destroy)="onDestroyItem($event)"></todo-item>
+        </ul>
+
+    </section>
+
+    <footer id="footer" *ng-if="list.length">
+        <span id="todo-count">{{activeItemsLeft}} {{itemStr}} left</span>
+        <ul id="filters">
+            <li>
+                <a href="#/"
+                   [class.selected]="filter === 'all'"
+                   (click)="filterItems('all')">All</a>
+            </li>
+            <li>
+                <a href="#/active"
+                   [class.selected]="filter === 'active'"
+                   (click)="filterItems('active')">Active</a>
+            </li>
+            <li>
+                <a href="#/completed"
+                   [class.selected]="filter === 'completed'"
+                   (click)="filterItems('completed')">Completed</a>
+            </li>
+        </ul>
+        <button id="clear-completed" (click)="clearCompleted()" *ng-if="hasCompleted()">Clear completed</button>
+    </footer>
