@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Dive in to ExtJs5</title>
+
+		<meta name="description" content="'Dive in to ExtJs5' presentation about new version JavaScript framework Sencha ExtJs 5">
+		<meta name="author" content="Sergii Danilov (Pencroff)">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-slide="1">
+					<h1>Dive into ExtJs 5</h1>
+                    </br>
+					<h4>Let's talk about new  version JavaScript framework <strong>Sencha ExtJs 5</strong></h4>
+                    </br>
+                    </br>
+                    </br>
+					<p>
+						<small>Created by <a href="http://pencroff.com" target="_blank">Sergii Danilov</a> / <a href="http://twitter.com/pencroff" target="_blank">@pencroff</a></small>
+					</p>
+                    <aside class="notes">
+                        Hello, my name is Sergii. I am a web developer. Let's discus today about ExtJs 5.
+                        </br><strong>Next => What is Sencha ExtJS?</strong>
+                    </aside>
+				</section>
+
+                <section id="what-is-extjs" data-slide="2">
+                    <h2>What is Sencha ExtJS?</h2>
+                    </br>
+                    </br>
+                    <p class="fragment grow roll-in"><strong>Wikipedia:</strong>
+                        <q cite="http://en.wikipedia.org/wiki/Ext_JS">
+                            &laquo;Ext JS is a pure JavaScript application framework for building interactive web applications using techniques such as Ajax,
+                            DHTML and DOM scripting. Originally built as an add-on library extension of YUI by Jack Slocum, Ext JS includes interoperability
+                            with jQuery and Prototype.&raquo;
+                        </q>
+                    </p>
+                    <p class="fragment grow roll-in"><strong>Sencha:</strong>
+                        <q cite="http://docs.sencha.com/extjs/5.0/core_concepts/classes.html">
+                            &laquo;Ext JS 5 ships with more than 300 classes.
+                            We have more than 2 million developers to date and they come from various backgrounds and locations.&raquo;
+                        </q>
+                    </p>
+                    <aside class="notes">
+                        <strong>What is Sencha ExtJS?</strong></br>
+                        So. What is ExtJs? This is JavaScript framework that contains all features for client-side development out of the box.
+                        ExtJs uses class-based development and as we can see it uses more than 300 classes and has big community with more than 2 million developers.
+                        </br><strong>Next => Popularity ExtJS</strong>
+                    </aside>
+                </section>
+
+                <section id="popularity-extjs" data-slide="3">
+                    <h2>Popularity ExtJS</h2>
+                    </br>
+                    <img class="imgnoborder" width="811" height="495" src="images/extjs-trends.png" alt="ExtJs in Google trends">
+                    </br>
+                    <a href="https://www.google.ie/trends/explore#q=ExtJs%2C%20AngularJs%2C%20EmberJs%2C%20Backbone.js" target="_blank">Play on Google trends</a>
+                    <aside class="notes">
+                        <strong>Popularity ExtJS</strong></br>
+                        What about popularity? As we can see first version was released in 2007 year and it was the most popular JS framework,
+                        until developers got new modern frameworks like Angular, Ember and Backbone. I think ExtJs lost first position, because
+                        it is so big and oriented to enterprise applications. But it is still has a big community.
+                        </br><strong>Next => Features out of the box</strong>
+                    </aside>
+                </section>
+
+                <section id="out-of-the-box" data-slide="4">
+                    <h2>Features out of the box</h2>
+                    </br>
+                    <p class="fragment">Class-based development</p>
+                    <p class="fragment">Application architecture (Backbone.js, AngularJS, Ember.js)</p>
+                    <p class="fragment">Data manipulation, like Underscore.js, but more</p>
+                    <p class="fragment">DOM queries (JQuery, Zepto.js)</p>
+                    <p class="fragment">UI elements (JQuery UI, Kendo UI)</p>
+                    <p class="fragment">Charts (Highcharts, Chart.js)</p>
+                    <p class="fragment">Loader (RequireJs, yepnope.js)</p>
+                    <aside class="notes">
+                        <strong>Features out of the box</strong></br>
+                        ExtJs has a lot of features out of the box that really help in development. As foundation in framework
+                        uses Class-based approach. ExtJs helps organise application architecture like AngularJS, Ember.js,
+                        Backbone.js. Also it has wide opportunities for data manipulation and dom queries. HTML and CSS are hidden
+                        from developers under UI elements and charts. All this features load into browser by internal loader.
+                        </br><strong>Next => Class-based approach</strong>
+                    </aside>
+                </section>
+
+                <section>
+                    <section id="class-based-approach" data-slide="5">
+                        <h2>Class-based approach</h2>
+                        </br>
+                        <ul>
+                            <li>Inheritance</li>
+                            <li>Overriding</li>
+                            <li>Mixins</li>
+                            <li>Statics</li>
+                            </br>
+                            <li>Singleton</li>
+                        </ul>
+                        <aside class="notes">
+                            <strong>Class-based approach</strong></br>
+                            Class-based approach allow extend the prototype nature of JavaScript and use OOP inside JS environment.
+                            </br><strong>Next => Inheritance</strong>
+                        </aside>
+                    </section>
+
+                    <section id="class-based-inheritance" data-slide="6">
+                        <h3>Inheritance</h3>
+                        </br>
+                        <pre><code>
+        Ext.define('App.common.proxy.AppRest', {
+            extend: 'Ext.data.proxy.Rest',
+            alternateClassName: 'Ext.data.AppRestProxy',
+            alias: 'proxy.apprest',
+            reader: {
+                type: 'json',
+                rootProperty: 'data',
+                totalProperty: 'total'
+            }
+        });
+                        </code></pre>
+                        <aside class="notes">
+                            <strong>Inheritance</strong></br>
+                            Look at Inheritance example. It's really easy to build a branched hierarchy of classes.
+                            </br><strong>Next => Overriding</strong>
+                        </aside>
+                    </section>
+
+                    <section id="class-based-overriding" data-slide="7">
+                        <h3>Overriding</h3>
+                        </br>
+                        <pre><code>
+        Ext.define('Jarvus.hotfixes.ext.form.field.Tag.FindRecord', {
+            override: 'Ext.form.field.Tag',
+            //    compatibility: '5.0.1255',
+
+            findRecord: function(field, value) {
+                return this.getStore().findRecord(field, value);
+            }
+        });
+                        </code></pre>
+                        </br>
+                        <p>New version still has bugs and this feature use for <a href="https://github.com/JarvusInnovations/sencha-hotfixes/tree/master/jarvus-hotfixes-ext-5.0.1.1255" target="_blank">hotfixes</a></p>
+                        <aside class="notes">
+                            <strong>Overriding</strong></br>
+                            Overriding give us very good opportunity update hardcoded value inside application. A few days ago I have updated hardcoded time format inside third party component.
+                            </br><strong>Next => Mixins</strong>
+                        </aside>
+                    </section>
+
+                    <section id="class-based-mixins" data-slide="8">
+                        <h3>Mixins</h3>
+                        </br>
+                        <pre><code>
+        // Declaration
+        Ext.define('CanSing', {
+            sing: function() {
+                alert("For he's a jolly good fellow...")
+            }
+        });
+
+        // Using
+        Ext.define('Musician', {
+            mixins: {
+                canSing: 'CanSing'
+            },
+            sing: function() {
+                // delegate singing operation to mixin
+                this.mixins.canSing.sing.call(this);
+            }
+        })
+                        </code></pre>
+                        <aside class="notes">
+                            <strong>Mixins</strong></br>
+                            If you need to blend some duplicate logic that is not depended from data, you can use mixins mechanism.
+                            </br><strong>Next => Statics</strong>
+                        </aside>
+                    </section>
+
+                    <section id="class-based-statics" data-slide="9">
+                        <h3>Statics</h3>
+                        </br>
+                        <pre><code>
+        Ext.define('Computer', {
+            statics: {
+                factory: function(brand) {
+                    /* 'this' in static methods refer to the class itself */
+                    return new this(brand);
+                }
+            },
+            constructor: function(brand) {
+                this._brand = brand;
+            }
+        });
+
+        var dellComputer = Computer.factory('Dell');
+                        </code></pre>
+                        <aside class="notes">
+                            <strong>Statics</strong></br>
+                            Static section gives us an opportunity to put methods to some type, not to instance.
+                            </br><strong>Next => Singleton</strong></br>
+                        </aside>
+                    </section>
+
+                    <section id="class-based-singleton" data-slide="10">
+                        <h3>Singleton</h3>
+                        </br>
+                        <pre><code>
+        Ext.define('Exceptions', {
+            singleton: true,
+            requires: ['Messages'],
+            onRequestException: function (conn, response, request, eOpts) {
+                'use strict';
+                var exceptionInfo = {
+                    Status: response.status + ' - ' + response.statusText,
+                    Description: response.responseText
+                };
+                Messages.showException(exceptionInfo);
+            }
+        });
+                        </code></pre>
+                        <aside class="notes">
+                            <strong>Singleton</strong></br>
+                            Also in ExtJs5 it is very easy to declare singleton behavior.
+                            </br><strong>Next => Data Package</strong>
+                        </aside>
+                    </section>
+                </section>
+
+                <section id="data-package" data-slide="11">
+                    <h2>Data Package</h2>
+                    <ul>
+                        <li>Model</li>
+                        <li>Store</li>
+                    </ul>
+                    </br>
+                    <img class="imgnoborder" width="532" height="493" src="images/data-model.png" alt="Data model structure">
+                    <aside class="notes">
+                        <strong>Data Package</strong></br>
+                        So, we have finished with basics of ExtJs 5 and let's go to Data Package.
+                        Data Package consists of two entities : Model and Storage.
+                        </br><strong>Next => Model</strong>
+                    </aside>
+                </section>
+
+                <section>
+                    <section id="model" data-slide="12">
+                        <h2>Model</h2>
+                        </br>
+                        <ul>
+                            <li>Fields</li>
+                            <li>Proxies</li>
+                            <li>Validations</li>
+                            <li>Associations</li>
+                            <li>Sessions</li>
+                        </ul>
+                        </br>
+                        <img class="imgnoborder" width="532" height="454" src="images/model-breakdown.png" alt="Model in ExtJs">
+                        <aside class="notes">
+                            <strong>Model</strong></br>
+                            In the Model we can easily declare fields, proxies, validators and associations.
+                            Also model supports sessions on the client side.
+                            </br><strong>Next => Model example</strong>
+                        </aside>
+                    </section>
+
+                    <section id="model-example" data-slide="13">
+                        <h2>Model example</h2>
+                        </br>
+                        <pre><code>
+        Ext.define('App.model.PostModel', {
+            extend: 'Ext.data.Model',
+            idProperty: '_id',
+            fields: [
+                { name: '_id', type: 'string' },
+                { name: 'title', type: 'string' },
+                { name: 'created', type: 'date' },
+                { name: 'published', type: 'boolean' },
+                { name: 'tags', type: 'auto' },
+                { name: 'locales', type: 'auto' } // complex type
+            ],
+            proxy: {
+                type: 'apprest',
+                url: '/api/posts'
+            }
+        });
+                        </code></pre>
+                        <aside class="notes">
+                            <strong>Model example</strong></br>
+                            Look at example of the model. It extended from base Model type and has fields array and proxy for using some kind of native storage (Server side, Local storage and etc.).
+                            </br><strong>Next => Custom type</strong>
+                        </aside>
+                    </section>
+
+                    <section id="custom-type" data-slide="14">
+                        <h2>Custom type</h2>
+                        </br>
+                        <pre><code>
+        Ext.define('App.fields.Gender', {
+            extend: 'Ext.data.field.String',s
+            alias: 'data.field.gender',
+            validators: {
+                type: 'inclusion',
+                list: [ 'female', 'male' ]
+            }
+        });
+                        </code></pre>
+                        <aside class="notes">
+                            <strong>Custom type</strong></br>
+                            Model supports Boolean, Date, Integer, Number and String field types, but you can declare a custom type.
+                            </br><strong>Next => Proxy</strong>
+                        </aside>
+                    </section>
+
+                    <section id="proxy" data-slide="15">
+                        <h2>Proxy</h2>
+                        </br>
+                        <span>
+                            <span style="float: left;">
+                                <h4>Server side</h4>
+                                <ul>
+                                    <li>Direct</li>
+                                    <li>Ajax</li>
+                                    <li>JsonP</li>
+                                    <li>Rest</li>
+                                </ul>
+                            </span>
+                            <span style="float: right;">
+                                <h4>Client side</h4>
+                                <ul>
+                                    <li>Memory</li>
+                                    <li>SessionStorage</li>
+                                    <li>LocalStorage</li>
+                                    <li>Sql</li>
+                                </ul>
+                            </span>
+                        </span>
+                        <aside class="notes">
+                            <strong>Proxy</strong></br>
+                            ExtJs has sets of proxies for client and server site.
+                            </br><strong>Next => Validators</strong>
+                        </aside>
+                    </section>
+
+                    <section id="validators" data-slide="16">
+                        <h2>Validators</h2>
+                        </br>
+                        <pre><code>
+        Ext.define('App.model.User', {
+            extend: 'Ext.data.Model',
+            fields: [
+                { name: 'id', type: 'int' },
+                { name: 'name', type: 'string' },
+                { name: 'gender', type: 'gender' }
+            ],
+            validators: {
+                // Validator type could be: Presence, Length, Range,
+                // Format, Inclusion, Exclusion, Email and Custom
+                name: [
+                    'presence',
+                    { type: 'length', min: 7 },
+                    { type: 'exclusion', list: ['Bender'] }
+                ]
+            }
+        });
+                        </code></pre>
+                        <aside class="notes">
+                            <strong>Validations</strong></br>
+                            Model has a few predefined types of validators list which could be extended by custom validators.
+                            </br><strong>Next => Object validation</strong>
+                        </aside>
+                    </section>
+
+                    <section id="using-validation" data-slide="17">
+                        <h2>Object validation</h2>
+                        </br>
+                        <pre><code>
+        var newUser = new App.model.User({
+            id: 10,
+            name: 'Bender',
+            gender: 'robot'
+        });
+
+        // run some validation on the new user we just created
+
+        console.log('Is User valid?', newUser.isValid());
+                        </code></pre>
+                        <aside class="notes">
+                            <strong>Object validation</strong></br>
+                            Look at the example of model validation. This model is not valid because name can't be Bender and gender can't be robot.
+                            </br><strong>Next => Associations</strong>
+                        </aside>
+                    </section>
+
+                    <section id="associations" data-slide="18">
+                        <h2>Associations</h2>
+                        </br>
+                        <ul>
+                            <li>One to One</li>
+                            <li>One to Manny</li>
+                            <li>Many to Manny</li>
+                        </ul>
+                        <aside class="notes">
+                            <strong>Associations</strong></br>
+                            Models support three kinds of associations: one to one, one to many and many to many.
+                            </br><strong>Next => Association example</strong>
+                        </aside>
+                    </section>
+
+                    <section id="association-example" data-slide="19">
+                        <h2>Association example</h2>
+                        </br>
+                        <pre><code>
+        Ext.define('App.model.Person', {
+            extend: 'App.model.Base',
+            fields: [ 'name' ],
+            hasMany: 'Order' // the "entityName" for "App.model.Order" (see below)
+        });
+
+        Ext.define('App.model.Order', {
+            extend: 'App.model.Base',
+            fields: [ 'name' ],
+            hasMany: 'OrderItem'
+        });
+                        </code></pre>
+                        </br>
+                        <a href="https://fiddle.sencha.com/#fiddle/c8o" target="_blank">Sandbox</a>
+                        <aside class="notes">
+                            <strong>Association example</strong></br>
+                            There is ‘one to many’ association example. Let's play with it in the sandbox.
+                            </br><strong>Next => Store</strong>
+                        </aside>
+                    </section>
+                </section>
+                <section>
+                    <section id="store" data-slide="20">
+                        <h2>Store</h2>
+                        </br>
+                        <ul>
+                            <li>Model</li>
+                            <li>Proxies</li>
+                            <li>Filter</li>
+                            <li>Grouper</li>
+                            <li>Sorter</li>
+                        </ul>
+                        <aside class="notes">
+                            <strong>Store</strong></br>
+                            Usually in the application we have single models as well as collections of models.
+                            Or Storages in ExtJs terminology. Storage supports proxies, filters, groupers and sorters.
+                            </br><strong>Next => Store example</strong>
+                        </aside>
+                    </section>
+
+                    <section id="store-example" data-slide="21">
+                        <h2>Store example</h2>
+                        </br>
+                        <pre><code>
+        Ext.define('App.model.PostStore', {
+            extend: 'Ext.data.Store',
+            model: 'App.model.PostModel',
+            storeId: 'PostStore',
+            autoLoad: true,
+            pageSize: 20,
+            proxy: {
+                type: 'apprest',
+                url: '/api/posts'
+            },
+            listeners: {
+                load: 'onStoreLoad'
+            }
+        });
+                        </code></pre>
+                        <aside class="notes">
+                            <strong>Store example</strong></br>
+                            Look at example of storage. As you can see it has a model and some options.
+                            It supports data pagination out of the box.
+                            </br><strong>Next => Application architecture</strong>
+                        </aside>
+                    </section>
+                </section>
+
+                <section>
+                    <section id="application-architecture" data-slide="22">
+                        <h2>Application architecture</h2>
+                        </br>
+                        <h3 class="fragment grow">MVC</h3>
+                        <p>or</p>
+                        <h3 class="fragment grow">MVVM</h3>
+                        </br>
+                        <p class="fragment">What is better?</p>
+                        <aside class="notes">
+                            <strong>Application architecture</strong></br>
+                            Next part of ExtJs is application architecture entities.
+                            In 4th version support MVC was added and in 5th version they added MVVM. What is better?
+                            </br><strong>Next => MVC</strong>
+                        </aside>
+                    </section>
+
+                    <section id="mvc" data-slide="23">
+                        <h2>MVC</h2>
+                        <img class="imgnoborder" width="791" height="431" src="images/MVC.png" alt="MVC in ExtJs">
+                        <ul>
+                            <li>M = model + storage</li>
+                            <li>V = viewport + UI components</li>
+                            <li>C = classic controller from ExtJs 4</li>
+                        </ul>
+                        <aside class="notes">
+                            <strong>MVC</strong></br>
+                            It is a good classic pattern, but in real applications we have some overhead in coding logic connected to view. I mean read/write operations.
+                            </br><strong>Next => MVVM</strong>
+                        </aside>
+                    </section>
+
+                    <section id="mvvm" data-slide="24">
+                        <h2>MVVM</h2>
+                        <img class="imgnoborder" width="791" height="431" src="images/MVVM.png" alt="MVVM in ExtJs">
+                        <ul>
+                            <li>M = model + storage</li>
+                            <li>V = viewport + UI components</li>
+                            <li>VM = view model</li>
+                        </ul>
+                        <aside class="notes">
+                            <strong>MVVM</strong></br>
+                            MVVM pattern devoid of this shortcoming, but viewmodel usually overloaded by application logic.
+                            </br><strong>Next => MVVM + VC</strong>
+                        </aside>
+                    </section>
+
+                    <section id="mvvm-vc" data-slide="25">
+                        <h2>MVVM + VC</h2>
+                        <img class="imgnoborder" width="620" height="550" src="images/MVVM-VC.png" alt="MVVM + VC in ExtJs">
+                        <aside class="notes">
+                            <strong>MVVM + VC</strong></br>
+                            ExtJs implemented variation of MVVM with view controller, that contains internal app logic.
+                            View Controller and Controller looks very similar, but ViewController are created for every
+                            view and traditional Controller can listen across few views.
+                            </br><strong>Next => UI elements</strong>
+                        </aside>
+                    </section>
+                </section>
+
+                <section>
+                    <section id="ui-elements" data-slide="26">
+                        <h2>UI elements</h2>
+                        </br>
+                        <ul>
+                            <li>View port & layouts</li>
+                            <li>Forms</li>
+                            <li>Grids</li>
+                            <li>Trees</li>
+                            <li>Charts</li>
+                        </ul>
+                        <aside class="notes">
+                            <strong>UI elements</strong></br>
+                            ExtJs 5 contains big library of ui components for fast development business applications.
+                            </br><strong>Next => Layouts</strong>
+                        </aside>
+                    </section>
+
+                    <section id="layouts" data-slide="27">
+                        <h2>Layouts</h2>
+                        </br>
+                        <img class="imgnoborder" width="561" height="481" src="images/layouts-extjs5.png" alt="Layouts in ExtJs 5">
+                        </br>
+                        <a href="http://dev.sencha.com/ext/5.0.1/examples/kitchensink/#layouts" target="_blank">Sandbox</a>
+                        <aside class="notes">
+                            <strong>Layouts</strong></br>
+                            Layouts give us an opportunity to manipulate ui elements position easily.
+                            </br><strong>Next => Forms</strong>
+                        </aside>
+                    </section>
+
+                    <section id="forms" data-slide="28">
+                        <h2>Forms</h2>
+                        </br>
+                        <img class="imgnoborder" width="700" height="482" src="images/form-fields.png" alt="Form fields in ExtJs 5">
+                        </br>
+                        <a href="http://dev.sencha.com/ext/5.0.1/examples/kitchensink/#form-fields" target="_blank">Sandbox</a>
+                        <aside class="notes">
+                            <strong>Forms</strong></br>
+                            Also we have a lot of components for creating forms
+                            </br><strong>Next => Grids</strong>
+                        </aside>
+                    </section>
+
+                    <section id="grids" data-slide="29">
+                        <h2>Grids</h2>
+                        </br>
+                        <img class="imgnoborder" width="838" height="486" src="images/grids.png" alt="Grids in ExtJs 5">
+                        </br>
+                        <a href="http://dev.sencha.com/ext/5.0.1/examples/kitchensink/#grids" target="_blank">Sandbox</a>
+                        <aside class="notes">
+                            <strong>Grids</strong></br>
+                            and grids
+                            </br><strong>Next => Trees</strong>
+                        </aside>
+                    </section>
+
+                    <section id="trees" data-slide="30">
+                        <h2>Trees</h2>
+                        </br>
+                        <img class="imgnoborder" width="560" height="490" src="images/trees.png" alt="Trees in ExtJs 5">
+                        </br>
+                        <a href="http://dev.sencha.com/ext/5.0.1/examples/kitchensink/#trees" target="_blank">Sandbox</a>
+                        <aside class="notes">
+                            <strong>Trees</strong></br>
+                            or trees.
+                            </br><strong>Next => Charts</strong>
+                        </aside>
+                    </section>
+
+                    <section id="charts" data-slide="31">
+                        <h2>Charts</h2>
+                        </br>
+                        <img class="imgnoborder" width="562" height="475" src="images/charts.png" alt="Charts in ExtJs 5">
+                        </br>
+                        <a href="http://dev.sencha.com/ext/5.0.1/examples/kitchensink/?charts=true#all" target="_blank">Sandbox</a>
+                        <aside class="notes">
+                            <strong>Charts</strong></br>
+                            Charts optimised for touch devices.
+                            </br><strong>Next => Browser support</strong>
+                        </aside>
+                    </section>
+
+                    <section id="browser-support" data-slide="32">
+                        <h2>Browser support</h2>
+                        </br>
+                        <img class="imgnoborder" width="900" height="530" src="images/browser-support.png" alt="Charts in ExtJs 5">
+                        <aside class="notes">
+                            <strong>Browser support</strong></br>
+                            All ui components support a lot of different browsers.
+                            </br><strong>Next => Router</strong>
+                        </aside>
+                    </section>
+                </section>
+
+                <section id="router" data-slide="33">
+                    <h2>Router</h2>
+                    </br>
+                    <pre><code>
+        Ext.define('App.root.RootCtrl', {
+            extend: 'Ext.app.ViewController',
+            routes : {
+                ':area/:verb/:id' : {
+                    action: 'onNavigateDetails',
+                    before: 'beforeNavigateDetails'
+                }
+            },
+            onNavigateDetails: function (area, verb, id) {
+                // update viewport by route parameters
+            },
+            beforeNavigateDetails: function (area, verb, id, action) {
+                // validate route parameters
+                if (verb !== 'add' && verb !== 'edit') this.redirectTo('404');
+                action.resume();
+            }
+        });
+                    </code></pre>
+                    <aside class="notes">
+                        <strong>Router</strong></br>
+                        The Router class is a new addition to Ext JS 5 that was built to
+                        make hash change interpretation very simple in a single page application.
+                        </br><strong>Next => Loader</strong>
+                    </aside>
+                </section>
+
+                <section id="loader" data-slide="34">
+                    <h2>Loader</h2>
+                    </br>
+                    <pre><code>
+        Ext.Loader.setConfig({
+            disableCaching: false, // Disable _dc parameter
+            enabled: true, // dynamic dependency loading
+            paths: {
+                'Global': 'src/common/Global.js',
+                'Messages': 'src/common/Messages.js',
+                'Exceptions': 'src/common/Exceptions.js',
+                'Request': 'src/common/Request.js',
+                'App.common.proxy.AppRest': 'src/common/AppRestProxy.js'
+            }
+        });
+                    </code></pre>
+                    <aside class="notes">
+                        <strong>Loader</strong></br>
+                        Loader used for resolving object dependencies based on 'require' section.
+                        </br><strong>Next => Sencha CMD</strong>
+                    </aside>
+                </section>
+
+                <section id="sencha-cmd" data-slide="35">
+                    <h2>Sencha CMD</h2>
+                    </br>
+                    <img class="imgnoborder" width="837" height="474" src="images/sencha-cmd.png" alt="Charts in ExtJs 5">
+                    <aside class="notes">
+                        <strong>Sencha CMD</strong></br>
+                        Sencha Cmd has a lot of features. From scaffolding a new project,
+                        to minifying and deploying your application to production,
+                        Sencha Cmd provides a full set of lifecycle management features to compliment your Sencha projects.
+                        </br><strong>Next => Pros and Cons</strong>
+                    </aside>
+                </section>
+
+                <section id="pros-and-cons" data-slide="36">
+                    <h2>Pros and Cons</h2>
+                    <h3 class="fragment">+</h3>
+                    <ul>
+                        <li>All in one and available out of the box</li>
+                        <li>High speed development</li>
+                        <li>Cross-browser compatibility</li>
+                        <li>Support tablets and touch-screens</li>
+                        <li>The extensibility of components</li>
+                        <li>JS optimization for deployment</li>
+                        <li>Theming</li>
+                        <li>Hidden HTML</li>
+                    </ul>
+                    <h3 class="fragment">-</h3>
+                    <ul>
+                        <li>It is not free ($3,225.00 for 5 licences)</li>
+                        <li>Enterprise orientation</li>
+                        <li>Large size of js files (565 kb minified and zipped)</li>
+                        <li>Hidden HTML</li>
+                    </ul>
+                </section>
+
+                <section id="questions" data-slide="37">
+                    <h2>Do you have any questions?</h2>
+                    </br>
+                    </br>
+                    </br>
+                    <h3>Sources:</h3>
+                    <ul>
+                        <li><a href="http://docs.sencha.com/extjs/5.0/" target="_blank">docs.sencha.com/extjs/5.0</a></li>
+                        <li><a href="http://docs.sencha.com/extjs/5.0/application_architecture/application_architecture.html" target="_blank">Introduction to Application Architecture</a></li>
+                        <li><a href="http://www.sencha.com/blog/ext-js-5-mvc-mvvm-and-more/" target="_blank">Ext JS 5: MVC, MVVM and More</a></li>
+                        <li><a href="http://www.sencha.com/blog/deep-dive-into-ext-js-5-data" target="_blank">Deep Dive Into Ext JS 5 Data</a></li>
+                        <li><a href="http://dev.sencha.com/ext/5.0.1/examples/index.html" target="_blank">Examples</a></li>
+                    </ul>
+                    </br>
+                    </br>
+                    <p>
+                        <small><a href="http://pencroff.com">Sergii Danilov</a> / <a href="http://twitter.com/pencroff" target="_blank">@pencroff</a></small>
+                        </br>
+                        <small><img class="imgnoborder" style="margin: 5px 10px;" src="images/github.svg" height="24" width="24"/><a href="https://github.com/Pencroff" target="_blank">github.com/Pencroff</a></small>
+                    </p>
+                </section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'concave', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				//parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				//parallaxBackgroundSize: '4100px 1080px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
