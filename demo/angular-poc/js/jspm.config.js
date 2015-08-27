@@ -1,5 +1,5 @@
 System.config({
-  "baseURL": "/",
+  "baseURL": "pencroff.github.io/presentations/demo/angular-poc/",
   "transpiler": "babel",
   "babelOptions": {
     "optional": [
