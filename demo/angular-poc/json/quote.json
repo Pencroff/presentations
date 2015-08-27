@@ -1,0 +1,44 @@
+{
+  "data": [
+    {
+      "QuoteId": 9,
+      "QuoteNo": "PO-123456",
+      "ClientId": 15,
+      "FieldWorkerId": null,
+      "SiteId": 9,
+      "SellCost": 3.0,
+      "Email": null,
+      "StatusId": 3
+    },
+    {
+      "QuoteId": 10,
+      "QuoteNo": "JW 2232323",
+      "ClientId": 15,
+      "FieldWorkerId": 5,
+      "SiteId": 8,
+      "SellCost": 15.73,
+      "Email": "email@email.com",
+      "StatusId": 2
+    },
+    {
+      "QuoteId": 11,
+      "QuoteNo": "JW 2232323",
+      "ClientId": 20,
+      "FieldWorkerId": 7,
+      "SiteId": null,
+      "SellCost": 75.31,
+      "Email": "info@company.com",
+      "StatusId": 1
+    },
+    {
+      "QuoteId": 12,
+      "QuoteNo": "JW 2232323",
+      "ClientId": 20,
+      "FieldWorkerId": 8,
+      "SiteId": null,
+      "SellCost": 35.45,
+      "Email": "info@company.com",
+      "StatusId": 3
+    }
+  ]
+}

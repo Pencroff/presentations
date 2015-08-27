@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Angular seed</title>
+    <link rel="icon" href="https://angular.io/resources/images/favicons/favicon-32x32.png" type="image/png"
+          sizes="32x32">
+    <link type="text/css" href="css/vendor.css" rel="stylesheet">
+    <link type="text/css" href="css/app-styles.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 50px;
+        }
+        .starter-template {
+            padding: 40px 15px;
+            text-align: left;
+        }
+        .spinner {
+            width: 60px;
+            height: 60px;
+            margin: 100px auto;
+            animation: rotate 1.0s infinite ease-in-out, background 1.0s infinite ease-in-out alternate;
+            border-radius: 5px;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+            }
+            50% {
+                transform: perspective(120px) rotateX(-180deg) rotateY(0deg);
+            }
+            100% {
+                transform: perspective(120px) rotateX(-180deg) rotateY(-180deg);
+            }
+        }
+
+        @keyframes background {
+            0% {
+                background-color: #F44336;
+            }
+            25% {
+                background-color: #3F51B5;
+            }
+            50% {
+                background-color: #009688;
+            }
+            75% {
+                background-color: #CDDC39;
+            }
+            100% {
+                background-color: #FFC107;
+            }
+        }
+
+        .line {
+            height: 60px;
+            width: 60px;
+            text-align: center;
+            margin: 0 30px;
+            line-height: 60px;
+            font-size: 18px;
+            color: #000810;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body ng-app="app">
+
+<div class="container-fluid">
+    <div class="starter-template" id="first-loader">
+        <div class="spinner"></div>
+    </div>
+    <div ui-view></div>
+</div>
+
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+<style>
+    .select2 > .select2-choice.ui-select-match {
+        /* Because of the inclusion of Bootstrap */
+        height: 29px;
+    }
+
+    .selectize-control > .selectize-dropdown {
+        top: 36px;
+    }
+</style>
+
+
+<script src="js/system.js" type="application/javascript"></script>
+<script src="js/jspm.config.js" type="application/javascript"></script>
+<script src="js/vendor.js" type="application/javascript"></script>
+<script src="js/application.js" type="application/javascript"></script>
+<script>
+    System.import('js/app-templates')
+        .then(function() {
+                return System.import('app');
+            })
+        .then(function () {
+            document.getElementById('first-loader').style.display = "none";
+        });
+</script>
+
+
+
+</body>
+</html>
