@@ -5,35 +5,55 @@ include includes/slidedefs
     +slide()
         include ./pages/idea
         include ./pages/noop-layer
-    include ./pages/advantages
-    +slide('My First Slide!', 'With a Subtitle')
-        p.
-            This is a slide.
-    +slide('My second slide')
-        p.
-            Look at this code. It's amazing:
-        +code("javascript").
-            if (true) {
-                console.log("lol");
-                function omg () {
-                   console.log("heollo");
-                }
-            }
-    +slide('Fragment list example')
-        +ul(["these", "are revealed", "one after another"], true)
-
     +slide()
-        +slide("Vertical slide 1")
-            p.
-                Going down...
-        +slide("Vertical slide 2")
-            p.
-                here we are
+        +slide('Advantages and Disadvantages')
+        include ./pages/advantages
+        include ./pages/complex-scenarios
+        include ./pages/disadvantages
+    +slide()
+        include ./pages/orm-kinds
+        include ./pages/manual
+        +slide('One DB engine')
+            +ul([
+                'Mongoose (MongoDb)',
+                'Sequelize (SQL)',
+                'Nohm (Redis)'
+            ])
+        +slide('OData solutions')
+        include ./pages/adapter-based
+    +slide('Adapter based')
+        +ul([
+            'ExtJs (just client)',
+            'Ember.data (just client)',
+            'Waterline (just server)',
+            'Falcor.js from Netflix (just server with one connection point)',
+            'PouchDB (client + server)',
+            'Js-Data (client + server - Inspired by Ember Data)'
+        ])
+    +slide()
+        +slide('Js-Data', 'Why do I like it?')
+        include ./pages/main-concept
+        +slide('Features')
+            +ul([
+                'Async and Sync methods',
+                'Model lifecycle and hooks',
+                'Events and Change Detection',
+                'Static and instance methods, computed properties',
+                'Query syntax',
+                'Relations',
+                'Validations'
+            ])
     +slide-md().
-        #Markdown!
+        ## Useful examples
 
-        * omg
-        * wtf
+        + Query middleware for express - [link](https://goo.gl/wKJhB5)
+        + Hybrid adapter (http + localstorage)
+    +slide-md().
+        ## Challenges
 
+        + Support additional parameters
+        + Getting array by **`find`** method instead of **`findAll`**
+    +slide-md().
+        #Questions
 
-
+        [@Pencroff](//twitter.com/Pencroff)

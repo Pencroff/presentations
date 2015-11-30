@@ -27,6 +27,8 @@ I will describe role and advantages. Solutions available on the market. Approach
         + Mongoose - MongoDb
         + Sequelize - SQL
         + Nohm - Redis
+        + Main idea - simplify driver api
+        + Adding additional functionality like - promises
     + OData solutions (JayData, Breeze.js)
         + Formalized query syntax between client and server
         + It's complex solution for client - server + db (not possible to use it without support on client and server)
@@ -56,18 +58,31 @@ I will describe role and advantages. Solutions available on the market. Approach
             + Client adapters (firebase, http, localforage, localstorage)
             + Server adapters (firebase, levelup, mongodb, redis, rethinkdb, sql)
     + Main concept in js-data
+        + Recognizable API
+        + Dead simple CRUD
+        + Framework-agnostic
+        + Storage-agnostic
     + Js-data features
         + Async and Sync methods
         + Model lifecycle and hooks
-        + Events
+        + Events and Change Detection
         + Static and instance methods, computed properties
         + Query syntax
         + Relations
         + Validations
-        + Change Detection
     + Useful examples
         + Query middleware for express
         + Hybrid adapter (http + localstorage)
+    + Challenges
+        + Support additional parameters
+        + Getting array by `.find` method
     + Questions
         + [js-data](//www.js-data.io/)
     
+    
+    'Common contract for all models',
+    'Caching mechanisms',
+    'Possible to extend number of storage\'s (SQL, NoSQL)',
+    'Change storage (SQL <=> NoSQL)',
+    'Simple implementation for audit information',
+    'Possible to implement record level security system'

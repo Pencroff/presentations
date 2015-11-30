@@ -147,6 +147,10 @@ module.exports = function ( grunt ) {
       jade: {
         files: [ 'src/jade/**/*.jade' ],
         tasks: [ 'jade:development']
+      },
+      img: {
+        files: [ 'src/img/**/*.*' ],
+        tasks: [ 'copy:img_dev']
       }
     },
 
@@ -172,7 +176,7 @@ module.exports = function ( grunt ) {
       'copy:lib_dev',
       'copy:fontawesome_dev',
       'copy:img_dev',
-      'jade:development',
+      'jade:development'
   ]);
 
   grunt.registerTask( 'compile', [
