@@ -20,16 +20,20 @@ include includes/slidedefs
                 'Nohm (Redis)'
             ])
         +slide('OData solutions')
+            +ul([
+                'JayData',
+                'Breeze.js'
+            ])
         include ./pages/adapter-based
-    +slide('Adapter based')
-        +ul([
-            'ExtJs (just client)',
-            'Ember.data (just client)',
-            'Waterline (just server)',
-            'Falcor.js from Netflix (just server with one connection point)',
-            'PouchDB (client + server)',
-            'Js-Data (client + server - Inspired by Ember Data)'
-        ])
+    +slide-md().
+        ## Adapter based
+
+        + **ExtJs** (for client side)
+        + **Ember.data** (for client side)
+        + **Waterline** (server side)
+        + **Falcor.js** from Netflix (complex solution)
+        + **PouchDB** (client + server)
+        + **Js-Data** (client + server - Inspired by Ember Data)
     +slide()
         +slide('Js-Data', 'Why do I like it?')
         include ./pages/main-concept

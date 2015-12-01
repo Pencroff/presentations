@@ -55,13 +55,16 @@ I will describe role and advantages. Solutions available on the market. Approach
                 + Extendable by adapters
             + For me most valuable feature of PouchDB - internal replication mechanism
         + Js-Data (client + server - Inspired by Ember Data)
-            + Client adapters (firebase, http, localforage, localstorage)
-            + Server adapters (firebase, levelup, mongodb, redis, rethinkdb, sql)
-    + Main concept in js-data
+    + Js-data
         + Recognizable API
         + Dead simple CRUD
         + Framework-agnostic
         + Storage-agnostic
+        + Solution for client and server
+            + Client adapters (firebase, http, localforage, localstorage)
+            + Server adapters (firebase, levelup, mongodb, redis, rethinkdb, sql)
+    + Main concept in js-data
+        As I mentioned
     + Js-data features
         + Async and Sync methods
         + Model lifecycle and hooks
@@ -70,6 +73,7 @@ I will describe role and advantages. Solutions available on the market. Approach
         + Query syntax
         + Relations
         + Validations
+        + Small size - 57.2k min version
     + Useful examples
         + Query middleware for express
         + Hybrid adapter (http + localstorage)
