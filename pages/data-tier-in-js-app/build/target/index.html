@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Slides</title>
+    <link rel="shortcut icon" type="image/png" href="img/icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!--link(rel='stylesheet', href='css/mermaid.forest.css')-->
+    <link rel="stylesheet" href="css/mermaid.css">
+    <link rel="stylesheet" href="reveal/css/reveal.min.css">
+    <link rel="stylesheet" href="reveal/css/theme/default.css" id="theme">
+    <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown>
+          <script type="text/template">
+            #Data tier in JS app
+            
+            Sergey Danilov [@Pencroff](//twitter.com/Pencroff)
+            
+            Full Stack developer at Fleetmatics
+          </script>
+        </section>
+        <section>
+          <section>
+            <h2>Idea</h2><img src="img/idea/diagram-n.png" style="border: none; border-shadow:none;">
+          </section>
+          <section data-background="img/noop-layer.gif">
+            <h2 style="color:#EEE; text-shadow: 2px 2px 5px #333;">...but not always</h2>
+            <h3 style="color:#EEE; text-shadow: 2px 2px 5px #333; text-transform: lowercase;">(when your app has useless layer)</h3>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Advantages and Disadvantages</h2>
+          </section>
+          <section>
+            <h2>Advantages</h2>
+            <ul>
+              <li>One place for DB related code</li>
+              <li>Database agnostic interface for client</li>
+              <li>Common contract for all models</li>
+              <li>Unit testing</li>
+              <li>Reduces the amount of code</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Complex scenarios</h2>
+            <ul>
+              <li>Caching mechanisms</li>
+              <li>Audit logging</li>
+              <li>Providing record level security system</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Disadvantages</h2>
+            <ul>
+              <li>Performance</li>
+              <li>Hidden specific feature DB</li>
+              <li>You should know what happen behind the scene</li>
+              <li>N+1 issue</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Kinds</h2>
+            <ul>
+              <li>Manual implementation</li>
+              <li>One DB engine</li>
+              <li>OData solutions</li>
+              <li>Adapter based</li>
+            </ul>
+          </section>
+          <section data-background="img/manual.gif">
+            <h2 style="color:#EEE; text-shadow: 2px 2px 5px #333;">Manual</h2>
+            <h3 style="color:#EEE; text-shadow: 2px 2px 5px #333; text-transform: lowercase;">(most flexible, but require time and qualification)</h3>
+          </section>
+          <section>
+            <h2>One DB engine</h2>
+            <ul>
+              <li>Mongoose (MongoDb)</li>
+              <li>Sequelize (SQL)</li>
+              <li>Nohm (Redis)</li>
+            </ul>
+          </section>
+          <section>
+            <h2>OData solutions</h2>
+            <ul>
+              <li>JayData</li>
+              <li>Breeze.js</li>
+            </ul>
+          </section>
+          <section data-background="img/adapte-based.gif">
+            <h2 style="color:#EEE; text-shadow: 2px 2px 5px #333;">Adapter based</h2>
+            <h3 style="color:#EEE; text-shadow: 2px 2px 5px #333; text-transform: lowercase;">(you could use any DB at the same time)</h3>
+          </section>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            ## Adapter based
+            
+            + **ExtJs** (for client side)
+            + **Ember.data** (for client side)
+            + **Waterline** (server side)
+            + **Falcor.js** from Netflix (complex solution)
+            + **PouchDB** (client + server)
+            + **Js-Data** (client + server - Inspired by Ember Data)
+          </script>
+        </section>
+        <section>
+          <section>
+            <h2>Js-Data</h2>
+            <h3>Why do I like it?</h3>
+          </section>
+          <section>
+            <h2>Main concept</h2><img src="img/main-concept.png" style="border: none; border-shadow:none;">
+          </section>
+          <section>
+            <h2>Features</h2>
+            <ul>
+              <li>Async and Sync methods</li>
+              <li>Model lifecycle and hooks</li>
+              <li>Events and Change Detection</li>
+              <li>Static and instance methods, computed properties</li>
+              <li>Query syntax</li>
+              <li>Relations</li>
+              <li>Validations</li>
+            </ul>
+          </section>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            ## Useful examples
+            
+            + Query middleware for express - [link](https://goo.gl/wKJhB5)
+            + Hybrid adapter (http + localstorage)
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            ## Challenges
+            
+            + Support additional parameters
+            + Getting array by **`find`** method instead of **`findAll`**
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            #Questions
+            
+            [@Pencroff](//twitter.com/Pencroff)
+          </script>
+        </section>
+      </div>
+    </div>
+    <script src="reveal/lib/js/head.min.js"></script>
+    <script src="reveal/js/reveal.min.js"></script>
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/helpers.js"></script>
+    <script src="lib/mermaid.min.js"></script>
+    <script>
+      Reveal.initialize({
+          controls: true,
+          progress: true,
+          history: true,
+          center: true,
+          
+          theme: 'beige', //- Reveal.getQueryHash().theme, // available themes are in /css/theme
+          transition: 'concave', //- Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+          
+          // Parallax scrolling
+          // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+          // parallaxBackgroundSize: '2100px 900px',
+          
+          // Optional libraries used to extend on reveal.js
+          dependencies: [
+              { src: 'reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: 'reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+              { src: 'reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+              { src: 'reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: 'reveal/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+              { src: 'reveal/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+              { src: 'reveal/plugin/mermaid/mermaid.js', condition: function() { return !!document.querySelector( '.diagram-slide' ); } }
+          ]
+      });
+      
+      
+    </script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+include includes/slidedefs
+
++slides-root('Slides')
+    include ./pages/title
+    +slide()
+        include ./pages/idea
+        include ./pages/noop-layer
+    +slide()
+        +slide('Advantages and Disadvantages')
+        include ./pages/advantages
+        include ./pages/complex-scenarios
+        include ./pages/disadvantages
+    +slide()
+        include ./pages/orm-kinds
+        include ./pages/manual
+        +slide('One DB engine')
+            +ul([
+                'Mongoose (MongoDb)',
+                'Sequelize (SQL)',
+                'Nohm (Redis)'
+            ])
+        +slide('OData solutions')
+            +ul([
+                'JayData',
+                'Breeze.js'
+            ])
+        include ./pages/adapter-based
+    +slide-md().
+        ## Adapter based
+
+        + **ExtJs** (for client side)
+        + **Ember.data** (for client side)
+        + **Waterline** (server side)
+        + **Falcor.js** from Netflix (complex solution)
+        + **PouchDB** (client + server)
+        + **Js-Data** (client + server - Inspired by Ember Data)
+    +slide()
+        +slide('Js-Data', 'Why do I like it?')
+        include ./pages/main-concept
+        +slide('Features')
+            +ul([
+                'Async and Sync methods',
+                'Model lifecycle and hooks',
+                'Events and Change Detection',
+                'Static and instance methods, computed properties',
+                'Query syntax',
+                'Relations',
+                'Validations'
+            ])
+    +slide-md().
+        ## Useful examples
+
+        + Query middleware for express - [link](https://goo.gl/wKJhB5)
+        + Hybrid adapter (http + localstorage)
+    +slide-md().
+        ## Challenges
+
+        + Support additional parameters
+        + Getting array by **`find`** method instead of **`findAll`**
+    +slide-md().
+        #Questions
+
+        [@Pencroff](//twitter.com/Pencroff)
