@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title></title>
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/blood.css" id="theme" />
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+	<link rel="stylesheet" href="css/layout.css" />
+	<link rel="stylesheet" href="plugin/customcontrols/style.css">
+
+
+
+    <script defer src="dist/fontawesome/all.min.js"></script>
+
+	<script type="text/javascript">
+		var forgetPop = true;
+		function onPopState(event) {
+			if(forgetPop){
+				forgetPop = false;
+			} else {
+				parent.postMessage(event.target.location.href, "app://obsidian.md");
+			}
+        }
+		window.onpopstate = onPopState;
+		window.onmessage = event => {
+			if(event.data == "reload"){
+				window.document.location.reload();
+			}
+			forgetPop = true;
+		}
+
+		function fitElements(){
+			const itemsToFit = document.getElementsByClassName('fitText');
+			for (const item in itemsToFit) {
+				if (Object.hasOwnProperty.call(itemsToFit, item)) {
+					var element = itemsToFit[item];
+					fitElement(element,1, 1000);
+					element.classList.remove('fitText');
+				}
+			}
+		}
+
+		function fitElement(element, start, end){
+
+			let size = (end + start) / 2;
+			element.style.fontSize = `${size}px`;
+
+			if(Math.abs(start - end) < 1){
+				while(element.scrollHeight > element.offsetHeight){
+					size--;
+					element.style.fontSize = `${size}px`;
+				}
+				return;
+			}
+
+			if(element.scrollHeight > element.offsetHeight){
+				fitElement(element, start, size);
+			} else {
+				fitElement(element, size, end);
+			}		
+		}
+
+
+		document.onreadystatechange = () => {
+			fitElements();
+			if (document.readyState === 'complete') {
+				if (window.location.href.indexOf("?export") != -1){
+					parent.postMessage(event.target.location.href, "app://obsidian.md");
+				}
+				if (window.location.href.indexOf("print-pdf") != -1){
+					let stateCheck = setInterval(() => {
+						clearInterval(stateCheck);
+						window.print();
+					}, 250);
+				}
+			}
+	};
+
+
+        </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<style>
+	p.prompt { margin:0;padding: 15px; border-left: 5px solid #ff4444; text-align:left }</style>
+# Mastering Prompt Engineering
+
+<div class="block">
+
+**Sergii Danilov**<br>
+Architect at Synchronoss
+</div>
+
+
+<small>24th of June 2025</small>
+</div></script></section><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## What is Prompt Engineering?
+
+<div class="block">
+
+Prompt engineering is the art of crafting effective instructions for AI models.
+</div>
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Ask to write something…
+
+- **Me**<br>Write a LinkedIn post about my Mastering Prompt Engineering talk
+- &shy;<!-- .element: class="fragment" data-fragment-index="1" -->**ChatGPT**<br>🚀 Excited to share my recent talk on _Mastering Prompt Engineering_!<br><u>Last week,</u> I had the pleasure of presenting …
+</div>
+
+<aside class="notes"><ul>
+<li>without details and context ChatGPT hallucinated</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Large Language Model (LLM)
+
+<div class="block">
+
+LLMs are "black boxes", that generate text by predicting the next most likely word.<br>They have no persistent memory and no access to real-time information.
+</div>
+</div>
+
+<aside class="notes"><ul>
+<li>LLMs predict next word in sequence based on learned from training data and prompt</li>
+<li>Some level of randomness may vary output</li>
+<li>Knowledge cutoff limitations</li>
+<li>No memory no real-time updates</li>
+<li>LLMs pay different levels of attention to different parts of the context</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Prompts
+
+<div class="block">
+
+A prompt is the instruction or question<br>you give an LLM to guide its response
+</div>
+</div>
+
+<aside class="notes"><ul>
+<li>Be specific and detailed in your instructions</li>
+<li>Provide context to reduce ambiguity<ul>
+<li>Provide fresh information</li>
+<li>Structure the output</li>
+</ul>
+</li>
+<li>&quot;garbage in, garbage out&quot;</li>
+<li>Iterate and refine your prompts</li>
+</ul>
+</aside></script></section></section><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Fundamental Prompt Patterns
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### The Persona Pattern
+
+<div class="block">
+
+A technique used<br>
+to simulate the behavior <br>and responses of a specific persona or role
+</div>
+
+
+
+> You are a yoga practitioner with 25 years of experience <!-- .element: class="prompt" -->
+</div>
+
+<aside class="notes"><ul>
+<li>Demo: Prompt from slide</li>
+<li>&quot;Guide me where to start&quot;</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Few-Shot Pattern
+
+<div class="block">
+
+A technique where a model is given a few examples to learn a task
+</div>
+
+
+
+> Text: "I absolutely loved that movie!"<br>Sentiment: Positive<br>Text: "The service was terrible and the food was cold."<br>Sentiment: Negative<br>Text: "The weather today is mild."<br>Sentiment: ??? <!-- .element: class="prompt" -->
+</div>
+
+<aside class="notes"><ul>
+<li>Where to use: Sentiment analysis, text summarization, entity tagging, tone of voice adoption</li>
+<li>Few high quality shots, better than a lot of inconsistent examples</li>
+<li>limited by context size</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Template Pattern
+
+<div class="block">
+
+Defines a fixed structure with blank slots or placeholders.
+<br>
+* `<tags>`
+* `[square]` 
+* ``` `code` ```
+</div>
+
+
+
+> Just a friendly reminder: Your appointment with [<u>Dr Name</u>] is scheduled for [<u>Date</u>] at \[<u>Time</u>] 
+> <!-- .element: class="prompt" -->
+</div>
+
+<aside class="notes"><ul>
+<li>Demo:<ul>
+<li>Prompt: Use as template:<code>Just a friendly reminder: Your appointment with [Dr Name] is scheduled for [Date] at [Time].</code>.</li>
+<li>Details: Generate an appointment reminder for a patient with &#39;Dr. Evans&#39; on &#39;July 15th&#39; at &#39;10:00 AM&#39;.</li>
+</ul>
+</li>
+<li>Excellent for structured data output, forms, reports</li>
+<li>Reduces need for post-processing</li>
+<li>Lack of Flexibility</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Flipped Interaction Pattern
+
+<div class="block">
+
+Shift the responsibility to the model to control the conversation and obtain the context it needs
+</div>
+
+
+
+> Help me cook my dinner. Ask me questions until you have all the information you need
+> <!-- .element: class="prompt" -->
+</div>
+
+<aside class="notes"><ul>
+<li>Collecting the most important details by LLM, improves accuracy and relevance</li>
+<li>Risk of Over-Questioning</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Chain-of-Thought Pattern
+
+<div class="block">
+
+Guide the model to reason step by step — this improves its accuracy on complex tasks.
+</div>
+
+
+
+> **Without CoT**: "What's 237 × 471?"<br>
+<br>**With CoT**: "Calculate 237 × 471 step by step, showing your work"
+> <!-- .element: class="prompt" -->
+
+`$237 \ast 471 = 111,627$`
+</div>
+
+<aside class="notes"><ul>
+<li>Prompt A: <code>What&#39;s 231 × 473?</code></li>
+<li>Prompt B: <code>Calculate 231 × 473 step by step, showing your work</code></li>
+<li><strong>When to use</strong>: Math, logic, analysis, debugging</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Demo: Travel Assistant
+
+<div class="block">
+
+A live example of using prompt engineering to turn an LLM into an interactive travel planner
+</div>
+
+
+
+> ROLE & CONTEXT<br>You are an expert travel planner with 15+ years of experience. I want to plan a trip to [DESTINATION] and need a comprehensive travel plan …
+> <!-- .element: class="prompt" -->
+</div>
+
+<aside class="notes"><ul>
+<li>Copy prompt from file presentation_help</li>
+<li>Possible enhancements: <ul>
+<li>Don’t limit the number of questions</li>
+<li>let the LLM search the internet for up-to-date details</li>
+</ul>
+</li>
+<li>Key Prompt Engineering Patterns Demonstrated<ul>
+<li><strong>Role-Playing Pattern</strong>: Expert travel planner persona</li>
+<li><strong>Structured Questioning Pattern</strong>: Specific, sequential questions</li>
+<li><strong>Few-Shot Learning Pattern</strong>: Good vs. bad examples</li>
+<li><strong>Output Formatting Pattern</strong>: Clear markdown structure</li>
+<li><strong>Constraint Pattern</strong>: Realistic limitations and requirements</li>
+<li><strong>Chain-of-Thought Pattern</strong>: Step-by-step task breakdown</li>
+<li><strong>Template Pattern</strong>: Consistent format expectations</li>
+</ul>
+</li>
+</ul>
+</aside></script></section></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Observations
+
+* Anthropic - Claude 4: Skilled at coding and automation; ideal as an agent.       
+* Google - Gemini Pro: Excellent for problem analysis and code review; great for agent workflows. 
+* OpenAI - GPT-4.1: Best for text processing, such as summarization, naming, and polishing content
+
+<div class="block">
+
+<br><br>
+<small>**Disclaimer:** These are my personal observations; your experience may be different</small>
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Want to Learn More?
+
+* [Anthropic: Prompt engineering](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview)
+* [Google: Prompt engineering](https://cloud.google.com/discover/what-is-prompt-engineering)
+* [www.promptingguide.ai](https://www.promptingguide.ai)
+* [Coursera: Prompt Engineering for ChatGPT](https://www.coursera.org/learn/prompt-engineering)
+* [Coursera: Advanced Prompt Engineering for Everyone](https://www.coursera.org/learn/advanced-prompt-engineering-for-everyone)
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Any questions?
+
+Reach me on LinkedIn
+[https://www.linkedin.com/in/sergiidanilov/](https://www.linkedin.com/in/sergiidanilov/)
+
+<img alt="contact" height="50%" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAcIAAAHCAQAAAABUY/ToAAAHv0lEQVR4AeyVMW7cMBBFv0DAKrd1x4sE0FV8kkjdXktH0d6AJQuBP+QXsaHW2ZERbBDA0CvGw+LBxHyOFvxL5tM8zdP8TuZpnuZpnuZpJoiOJguEb82IjZE3Jn9lHMlSrjd1lQmib81QzYEz14tjGMhS3Kyugg3Xmgs2PKcxvnVcPJlL6qYPfxcTNrrWnLFxscwVldacsNFbZkRlfImJirMmFFAZ/mQaqRyZTzBM/ZMjs9dM9qYySjKT1x2v6hh/5mPueMumV/Z70/3+s140F6eO4Uc+5o5zNqWEvdmzMBUzvpUsUqeOy3s+jrHEFbY44t68UKcDk4V1b3oWFtvsWEivMnVgsCfkKJ6YViq2afDMXOCPzYTuszmhl5mvx9u96O1rC3TbCIyfTMDJzCPhfC/aN22eJhSA4dFMQCdzee85fdRC7bi2PafiuAD+0VwBHJszcHk0I4Dx0JyA/nVmADAcTgiAe2oaqdimwT8zm4syeYr67G2zHU7ZLVFXzTbbQBh7irre38q0J/T6VP7fGxqpb6UKC9evvXh9pDWSUlhwzZYZm60fBsWgHc+k7mvfhF/Umw1qWzEQhCmBXKNHDf+5Vo5S38JAsUqz39uv8vMGdwkIBRAvPAaUWe9qZiL/P5IJViPLCcbUrJHl1GRSlwzVk5rToa5KfTr0T6TeKSjSD3uotyeQ6AQbLBTjGVkpDJs6VOqE/PG9SJTU10iUVKHevkKi3grFWDOUirFQqXVVVKl9ZdxX47UDKJYKiV9BHT5aRFZOp1x0Om1k4ehKpI6ucJElUhdZOtdi0bmWbrlYdMtth/7decJk5rWSTyAnM699fQKJPeZHy7w/ss9QvyqrkqVLLDccI3KNF+/jOI1j35cpq4nlNy4ViciLl3EogODqY8pq3j6XK84YWRov/goOVEfU5/PFRsg2Q/2qrP4MsQu2jHDjCUPgnyGS3pImxCJPmBCpSyT9bGlSoPKE+8lybYzsM9SvyrI5NIwe2OicZjlTRdI4xB3SNCdoznGRNOsvIpYszZzaUb0tkQ2G+lVZfpaxvfzJCZnZKA0QQ1QklAjMqZx5LE0Xg1skZRB4nAS3zIBp9DgsdkQ2GGpXZf0cGoxE5qJhKANzjCmYmJCMYcjJfmNIjzGFIRMyRj/z39CXg2HcpgBmY2SfoX5Vlvyfl093bp7P+SzcogvukHRUEkZvzWIxOu8OSRcfRXqln2eBGt3+tjOyz1C/KivOMkRa/qraf9cGXFRvTmqEYf6qw3jRenyoGD0dEKPHr7qaW5wJ+GZU6o7IBkP9qqzX1By1zk+FG4cub0+KkeN9ntmIRQ563oqEfNrWc0KBirjg7U7IPkP9qqzX1J6y49ieozM+5zbFNDU92cdBieM6estGnCa1amKMKAOylMsVWR8Ex4bIPkP9qqy/95YZll3A30IDlA4gczM7D/4yVXs5I5WgLNHt1IxGx+lsjuwz1K/KAk1t9GDCpZgb6SfPitG4w1RNATnSw55VqhGLSZ6ideCb90b2GepXZclZ5n6Ynyy4yCoRxXDAAc6VhX57mMJiaJJ33DILPW7yuzGyz1C/Kqv0UG7lXTGXtpG350SUWUwzKSDTqvL2LoV1/tPAilbtMUHwz72RfYb6VVnhy3KjBOo4xpFd4L5n9YYjpZl0qSM7T65mxYgL5gZXOmNiOm8tIz22RfYZ6ldl4VnmptijAWn8GQ992UwEvBjKBnUPfdlMftTCIPg1yoXT2Q7ZZ6hflfV3P47ROXI4MiaNRckkRCoR/bfiIDc7+JOmf5HK0vxXZjR1PBn/kr1shWwz1K/K+jmE+Gejxlf0Q5mIcpRLjpEZPVilsMgHC2JMl31v8rsxss9Qvypr9BAxuk/+BRmL0g93eojo3idZyyiWHjzpobDHPFkpQjwj4f2QfYb6VVmfD2UY6t0CDUF5U0XTOn0DTxNS3Y7RKCMkEBxpfDxANkb2GepXZf33s7nZVN5UqU9eblPVt2M+KuSViKW4kUORNkY2GGpUZf1d2HEYSL9MaZqFDZiRdg+m1S9wmqBhPWakHXslU/FGjqkddmdvZJ+hflXWzqHLn3buQLNiIIjCMKCv2Tfpq5fK5DOMyLEReu2i5PITM7q7M3NOutbS8dtHNgOpna/teobJn9Ep0TSlrhltNPX/yTxCeVZe+e6HNTuZzv46pQoxi8fBPXX29KljCGg8Do6t75ojUOQQ7XgcXGIhyZn2Gsm7F0cImWYFeWul7kZrdFR2nVx3wxFhTi7Ors3rDjzCz8k5Sg+oyKmEEJtObtWM5JB9leQ+TiOEDLOCvLVSl7U1O7sVBJQqZUXRiZjc5IoQ6piyv+h+TA72H4UPRc6f5aZ6wEiu+ZTk1H+X9EWCMELINCvIG+txkg7cKIYS84qkPTf+of68IundjZwoTj+JzCO0mpV763myKVXq5TnkLsimjqmAceXN/9kl7aLIqSRxAj5E2sFS0q6ZkXbqPEJOhzwr6Ym0fgoiuVA02b38tGvWPYHzRWNfwIad2g2D24YJUJKcDuukm1RKur1FpBtjGiG31CAr6zfjYy2Qep5GMerJ47eJ/NJnNf5Rwx6/zZVO9XaNnHrdzG2zSqroUlIVGZIq1zRCquU4K3mFvr96uslNbnKTm9zkJjf5C3iyy4vfPtOQAAAAAElFTkSuQmCC">
+</div></script></section></div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/math/math.js"></script>
+	<script src="plugin/mermaid/mermaid.js"></script>
+	<script src="plugin/chart/chart.min.js"></script>
+	<script src="plugin/chart/plugin.js"></script>
+	<script src="plugin/menu/menu.js"></script>
+	<script src="plugin/customcontrols/plugin.js"></script>
+
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+	  function isLight(color) {
+		let hex = color.replace('#', '');
+
+		// convert #fff => #ffffff
+		if(hex.length == 3){
+			hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`;
+		}
+
+		const c_r = parseInt(hex.substr(0, 2), 16);
+		const c_g = parseInt(hex.substr(2, 2), 16);
+		const c_b = parseInt(hex.substr(4, 2), 16);
+		const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+		return brightness > 155;
+	}
+
+	var bgColor = getComputedStyle(document.documentElement).getPropertyValue('--r-background-color').trim();
+	var isLight = isLight(bgColor);
+
+	if(isLight){
+		document.body.classList.add('has-light-background');
+	} else {
+		document.body.classList.add('has-dark-background');
+	}
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath.MathJax3,
+		  RevealMermaid,
+		  RevealChart,
+		  RevealCustomControls,
+		  RevealMenu,
+        ],
+
+
+    	allottedTime: 120 * 1000,
+
+		mathjax3: {
+			mathjax: 'plugin/math/mathjax/tex-mml-chtml.js',
+		},
+		markdown: {
+		  gfm: true,
+		  mangle: true,
+		  pedantic: false,
+		  smartLists: false,
+		  smartypants: false,
+		},
+
+		mermaid: {
+			theme: isLight ? 'default' : 'dark',
+		},
+
+		customcontrols: {
+			controls: [
+				{id: 'toggle-overview',
+				title: 'Toggle overview (O)',
+				icon: '<i class="fa fa-th"></i>',
+				action: 'Reveal.toggleOverview();'
+				},
+			]
+		},
+		menu: {
+			loadIcons: false
+		}
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"width":960,"height":700,"margin":0.04,"maxScale":2,"controls":true,"progress":true,"slideNumber":false,"transition":"slide","transitionSpeed":"normal"}, queryOptions);
+    </script>
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+
+  <!-- created with Advanced Slides -->
+</html>
