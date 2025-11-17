@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title></title>
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/blood.css" id="theme" />
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+	<link rel="stylesheet" href="css/layout.css" />
+	<link rel="stylesheet" href="plugin/customcontrols/style.css">
+
+
+
+    <script defer src="dist/fontawesome/all.min.js"></script>
+
+	<script type="text/javascript">
+		var forgetPop = true;
+		function onPopState(event) {
+			if(forgetPop){
+				forgetPop = false;
+			} else {
+				parent.postMessage(event.target.location.href, "app://obsidian.md");
+			}
+        }
+		window.onpopstate = onPopState;
+		window.onmessage = event => {
+			if(event.data == "reload"){
+				window.document.location.reload();
+			}
+			forgetPop = true;
+		}
+
+		function fitElements(){
+			const itemsToFit = document.getElementsByClassName('fitText');
+			for (const item in itemsToFit) {
+				if (Object.hasOwnProperty.call(itemsToFit, item)) {
+					var element = itemsToFit[item];
+					fitElement(element,1, 1000);
+					element.classList.remove('fitText');
+				}
+			}
+		}
+
+		function fitElement(element, start, end){
+
+			let size = (end + start) / 2;
+			element.style.fontSize = `${size}px`;
+
+			if(Math.abs(start - end) < 1){
+				while(element.scrollHeight > element.offsetHeight){
+					size--;
+					element.style.fontSize = `${size}px`;
+				}
+				return;
+			}
+
+			if(element.scrollHeight > element.offsetHeight){
+				fitElement(element, start, size);
+			} else {
+				fitElement(element, size, end);
+			}		
+		}
+
+
+		document.onreadystatechange = () => {
+			fitElements();
+			if (document.readyState === 'complete') {
+				if (window.location.href.indexOf("?export") != -1){
+					parent.postMessage(event.target.location.href, "app://obsidian.md");
+				}
+				if (window.location.href.indexOf("print-pdf") != -1){
+					let stateCheck = setInterval(() => {
+						clearInterval(stateCheck);
+						window.print();
+					}, 250);
+				}
+			}
+	};
+
+
+        </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<style>
+	p.prompt { margin:0;padding: 15px; border-left: 5px solid #ff4444; text-align:left }
+	h1#from-prompts-to-programs-dspy-in-120-minutes { font-size: 2em; text-transform: none }
+	h2 { font-size: 1.85em !important }
+	h1, h2, h3, h4, h5 { text-transform: none !important }
+	h1.transform, h2.transform, h3.transform, h4.transform, h5.transform { text-transform: uppercase !important }
+	.small {font-size: 0.7em !important}
+</style>
+
+# From Prompts to Programs: <span style="color:#a23; text-shadow:0 1px 0 #912,0 2px 0 #801,0 3px 0 #700, 0 4px 0 #600, 0 5px 0 #500, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 20px 20px rgba(0, 0, 0, 0.15)"><br>DSPy in 120 Minutes<span>
+
+Pre-workshop setup:
+
+<img alt="contact" height="30%" src="data:image/png;base64,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">
+
+[README.md](https://github.com/Pencroff/dspy_workshop/blob/main/README.md)
+</div>
+
+<aside class="notes"><ul>
+<li>Help with setup - up to 10 mins</li>
+</ul>
+</aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# From Prompts to Programs: <span style="color:#a23; text-shadow:0 1px 0 #912,0 2px 0 #801,0 3px 0 #700, 0 4px 0 #600, 0 5px 0 #500, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 20px 20px rgba(0, 0, 0, 0.15)"><br>DSPy in 120 Minutes<span>
+
+<div class="block">
+
+**Sergii Danilov**<br>
+Architect at Synchronoss
+</div>
+
+
+<small>15th of November 2025</small>
+</div></script></section><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Why DSPy?
+
+<div class="block">
+
+How do you tune a prompt with over 300 rows?
+</div>
+</div>
+
+<aside class="notes"><ul>
+<li>Explain study note prompt</li>
+<li>Show structure</li>
+<li>file:///Users/pencroff/Developer/Notes/Projects/Talk-Workshop on PyCon 2025/a_presentation/Study_note_prompt.md</li>
+<li>file:///Users/pencroff/Developer/Notes/Projects/Talk-Workshop on PyCon 2025/a_presentation/assets/prompt_proportions_simple.svg</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### DSPy can help…
+
+But first let's check building blocks of DSPy
+</div>
+
+<aside class="notes"><ul>
+<li>Prep to run <code>notebooks/01_first_call.ipynb</code></li>
+</ul>
+</aside></script></section></section><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## DSPy first call
+
+<div class="block">
+
+LLM vs DSPy
+<br></br>
+<small>*DSPy used **LiteLLM** library<br>for LLM connection management*<small></small>
+<br></br>
+`notebooks/01_first_call.ipynb`
+</div>
+</div>
+
+<aside class="notes"><ul>
+<li>Iterate over different llms<ul>
+<li><a href="https://console.groq.com/docs/model/llama-3.1-8b-instant">https://console.groq.com/docs/model/llama-3.1-8b-instant</a></li>
+<li><a href="https://console.groq.com/docs/model/openai/gpt-oss-20b">https://console.groq.com/docs/model/openai/gpt-oss-20b</a></li>
+</ul>
+</li>
+<li>Disclamer<ul>
+<li>Will be using small 8B param LLM - Llama 3.1 8B from Groq</li>
+<li>gpt-oss-20b will be used once on final steps</li>
+</ul>
+</li>
+<li>Make a row call by llm</li>
+<li>Let make a call by <code>dspy.Predict</code></li>
+<li>Example of <code>dspy.context</code> and different llm</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Play with DSPy
+<div class="block">
+
+* **Task A:**
+  
+  Make a call asking, "*Explain LLMs in one sentence*"
+* **Task B:**
+  
+Ask same question 3 times but with different *temperature* or *cache* params
+</div>
+</div>
+
+<aside class="notes"><ul>
+<li>Let people play with tasks</li>
+<li>Some params such as <code>temperature</code> managed on llm level</li>
+</ul>
+</aside></script></section></section><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## DSPy core concepts
+
+<div class="block">
+
+Let's open
+
+`notebooks/02_core_concepts.ipynb` file
+</div>
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Example<!-- .element: class="transform" -->
+
+Code:
+```python
+def build_query(table, columns, condition):  
+	query = "SELECT " + ", ".join(columns) +
+		" FROM " + table +
+		" WHERE " condition  return query
+```
+Error (context):
+```bash
+$ invalid syntax (<unknown>, line 2)
+```
+</div>
+
+<aside class="notes"><ul>
+<li>Describe example and main idea of today&#39;s practice</li>
+<li>Different python snippets, and errors and test cases which can validate correctness</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Module and Prediction
+
+```python
+dspy.Predict("snippet, context -> summary, confidence")
+```
+</div>
+
+<aside class="notes"><ul>
+<li>There are 2 input and 2 output parameters</li>
+<li>dspy.inspect_history - output values</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### `ChainOfThought` and many more
+
+```python
+dspy.ChainOfThought("snippet, context -> summary, confidence")
+```
+</div>
+
+<aside class="notes"><ul>
+<li><a href="https://dspy.ai/api/modules/ChainOfThought/">https://dspy.ai/api/modules/ChainOfThought/</a></li>
+<li>ReAct</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Signature
+
+<div class="block">
+
+Add custom instructions
+</div>
+</div>
+
+<aside class="notes"><ul>
+<li>3 ways to add custom instructions<ul>
+<li>In module</li>
+<li>Signature one-liner</li>
+<li>Signature class</li>
+</ul>
+</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Play with code
+
+<div class="block">
+
+Task
+
+Extend `Signature` by fields descriptions and compare with previous result
+</div>
+</div>
+
+<aside class="notes"><ul>
+<li>Let people play with tasks</li>
+<li>Check result, is it better?</li>
+</ul>
+</aside></script></section></section><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Pipeline
+
+<div class="block">
+
+Let's open
+
+`notebooks/03_pipeline.ipynb` file
+</div>
+</div>
+
+<aside class="notes"><ul>
+<li>Same snippet, error + test case</li>
+<li>New helper <code>validate_prediction</code><ul>
+<li>content / snippet</li>
+<li>test_case</li>
+</ul>
+</li>
+<li>Overview provided Signatures</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Custom module class
+
+```python
+class CodeFixer(dspy.Module):
+	"""[Custom instructions as doc string]"""
+	def __init__(self):
+		# Initialize all required components
+	def forward(self, snippet: str, context: str) -> str:
+		# Pipeline logic
+```
+</div>
+
+<aside class="notes"><ul>
+<li><code>forward</code> params, same as we would declare module as one-liner</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Module tasks
+
+<div class="block">
+
+* Task A: Make prediction with custom module
+* Task B: Try to use prediction as input for second fixer call
+* Bonus: Calls could be iterative
+</div>
+</div></script></section></section><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Module evaluation
+
+Required `mlflow`
+
+```bash
+$ mlflow server --backend-store-uri sqlite:///data/mlflow.db --port 5005
+```
+Let's open
+
+`notebooks/04_evaluation.ipynb` file
+</div>
+
+<aside class="notes"><ul>
+<li>We prep our module, ready for prod</li>
+<li>run in external terminal
+<code>mlflow server --backend-store-uri sqlite:///data/mlflow.db --port 5005</code><ul>
+<li>We will use SQLite for seving all data</li>
+</ul>
+</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Test data
+
+<div class="block">
+
+Test data located in `data/dataset.yaml`
+```yaml
+  id: number
+  name: short description
+  comment: context of the example and issue
+  traceback: traceback of the error, usually syntax error
+  content: snippet of the code
+  test_case: assert test case,
+			  verifies the correctness of the code  
+```
+</div>
+</div>
+
+<aside class="notes"><ul>
+<li>For demo purpose we have 20 synthetic examples</li>
+<li>Real dataset might have much more\</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Metric Function
+
+<div class="block">
+
+Returns:
+* `0.00` - if syntax error
+* `0.25` - for runtime error
+* `0.50` - syntax ok, but test failed
+* `1.00` - all good: syntax and assertions passed
+</div>
+</div>
+
+<aside class="notes"><ul>
+<li>based on <code>validate_prediction</code> helper</li>
+<li>adopt input and output data for evaluation</li>
+<li>returns evaluation score</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Experiment
+
+<div class="block">
+
+Let's set `DummyFixer` result as baseline
+</div>
+
+
+
+Open `http://127.0.0.1:5005` in browser
+</div>
+
+<aside class="notes"><ul>
+<li>Wrap data as <code>dspy.Example</code></li>
+<li>Use <code>dspy.Evaluate</code> for evaluation</li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Evaluate CodeFixer
+
+<div class="block">
+
+* **Task:** Provide code to evaluate `fixer`
+* ===
+* Run evaluation 
+* Analyze Results
+</div>
+</div>
+
+<aside class="notes"><ul>
+<li>Which types of errors does your fixer handle best?</li>
+<li>Which examples still fail? Why?</li>
+<li>What&#39;s the score improvement over baseline?</li>
+</ul>
+</aside></script></section></section><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Optimization
+<div class="block">
+
+Cherry on the cake
+<br>
+<br>
+</div>
+
+
+Let's open
+
+`notebooks/05_optimization_demo.ipynb` file
+</div>
+
+<aside class="notes"><ul>
+<li></li>
+</ul>
+</aside></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Optimizers
+
+Let DSPy to refine prompts for you
+
+<div class="block">
+
+* `MIPROv2`
+* `GEPA`
+</div>
+</div>
+
+<aside class="notes"><ul>
+<li><a href="https://dspy.ai/api/optimizers/GEPA/overview/">https://dspy.ai/api/optimizers/GEPA/overview/</a></li>
+<li>Different Optimizers used different ideas for prompt improvments</li>
+</ul>
+</aside></script></section></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Want to Learn More?
+
+Check References in `README.md` in repo
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Any questions?
+
+Reach me on LinkedIn
+[https://www.linkedin.com/in/sergiidanilov/](https://www.linkedin.com/in/sergiidanilov/)
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+#### How to use "Study note" prompt
+
+<div class="block">
+
+<!-- .element: class="small" -->
+* Use [zed](https://zed.dev)
+* Register https://brave.com/search/api/ account
+	* Generate access token
+* Add [Brave Search MCP server](https://github.com/brave/brave-search-mcp-server) to Zed
+* Connect some LLM provider or use trial with Claude Sonnet 4.5
+* Add prompt to "Rules"
+* Add prompt as "Study_note" rule
+* Use prompt as "@ → Rules → Study_note"
+* Provide your topic, for example: "Gradient descent"
+* Save generated markdown as a file
+* Generated markdown optimized for [Obsidian](https://obsidian.md)
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## <span style="color:#a23; text-shadow:0 1px 0 #912,0 2px 0 #801,0 3px 0 #700, 0 4px 0 #600, 0 5px 0 #500, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 20px 20px rgba(0, 0, 0, 0.15)">The End</span>
+</div></script></section></div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/math/math.js"></script>
+	<script src="plugin/mermaid/mermaid.js"></script>
+	<script src="plugin/chart/chart.min.js"></script>
+	<script src="plugin/chart/plugin.js"></script>
+	<script src="plugin/menu/menu.js"></script>
+	<script src="plugin/customcontrols/plugin.js"></script>
+
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+	  function isLight(color) {
+		let hex = color.replace('#', '');
+
+		// convert #fff => #ffffff
+		if(hex.length == 3){
+			hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`;
+		}
+
+		const c_r = parseInt(hex.substr(0, 2), 16);
+		const c_g = parseInt(hex.substr(2, 2), 16);
+		const c_b = parseInt(hex.substr(4, 2), 16);
+		const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+		return brightness > 155;
+	}
+
+	var bgColor = getComputedStyle(document.documentElement).getPropertyValue('--r-background-color').trim();
+	var isLight = isLight(bgColor);
+
+	if(isLight){
+		document.body.classList.add('has-light-background');
+	} else {
+		document.body.classList.add('has-dark-background');
+	}
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath.MathJax3,
+		  RevealMermaid,
+		  RevealChart,
+		  RevealCustomControls,
+		  RevealMenu,
+        ],
+
+
+    	allottedTime: 120 * 1000,
+
+		mathjax3: {
+			mathjax: 'plugin/math/mathjax/tex-mml-chtml.js',
+		},
+		markdown: {
+		  gfm: true,
+		  mangle: true,
+		  pedantic: false,
+		  smartLists: false,
+		  smartypants: false,
+		},
+
+		mermaid: {
+			theme: isLight ? 'default' : 'dark',
+		},
+
+		customcontrols: {
+			controls: [
+				{id: 'toggle-overview',
+				title: 'Toggle overview (O)',
+				icon: '<i class="fa fa-th"></i>',
+				action: 'Reveal.toggleOverview();'
+				},
+			]
+		},
+		menu: {
+			loadIcons: false
+		}
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"width":960,"height":700,"margin":0.04,"maxScale":2,"controls":true,"progress":true,"slideNumber":false,"transition":"slide","transitionSpeed":"normal"}, queryOptions);
+    </script>
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+
+  <!-- created with Advanced Slides -->
+</html>
